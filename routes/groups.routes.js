@@ -23,6 +23,7 @@ router.get('/groups', async (req, res, next) => {
   try {
     const allGroups = await Groups.find().populate('chat members');
     res.status(200).json(allGroups);
+    /* a */
   } catch (error) {
     next(error);
   }
