@@ -34,7 +34,14 @@ router.get('/groups/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const singleGroup = await Groups.findById(id).populate('chat members');
+    const singleGroup = await Groups.findById(id).populate('chat members goals')
+    .populate({
+      path: 'chat',
+      populate: {
+        path: 'sender',
+      model: 'User'  
+      }
+    })
     res.status(200).json(singleGroup);
   } catch (error) {
     next(error);

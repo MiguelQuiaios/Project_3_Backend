@@ -18,7 +18,7 @@ const groupsSchema = new Schema(
         { type: Schema.Types.ObjectId, ref:'User' }
      ],
     interests :[String],
-    goals: [ { type: Schema.Types.ObjectId, ref:'Goals' } ]
+    goals: [ { type: Schema.Types.ObjectId, ref:'Goal' } ]
   },
   {
     

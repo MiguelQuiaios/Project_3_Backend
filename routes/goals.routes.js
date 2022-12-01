@@ -1,14 +1,20 @@
 const router = require('express').Router();
 const Goals = require('../models/Goals.model');
+const Groups = require('../models/Groups.model');
 
 
-
-router.post('/goals', async (req, res, next) => {
+router.post('/goals/:groupId', async (req, res, next) => {
   try {
     const { title, description, img } = req.body;
+    const {groupId} = req.params
 
     const newGoal = await Goals.create({ title, description, img});
-
+    await Groups.findByIdAndUpdate(groupId, {
+      $push:{
+        goals: newGoal._id
+      }
+    })
+console.log(newGoal._id)
     res.status(201).json(newGoal);
   } catch (error) {
     res.json(error);
